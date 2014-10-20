@@ -1,5 +1,6 @@
 # FrequentWord algorithm #
 
+
 def main():
     # input
     filename = "dataset_2_9.txt" ## Change this ##
@@ -13,7 +14,10 @@ def main():
 def frequentWord(text, k):
     freqPatterns = []
     for i in range(0, (len(text) - k) + 1):
-        pass
+        # get word
+        word = ""
+        for j in range(i, i + k):
+            word = word + text[j]
 
     return ""
 
