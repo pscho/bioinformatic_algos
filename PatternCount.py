@@ -1,7 +1,7 @@
 # Bioinformatic Algorithms #
 # PatternCount algorithm (naive?) #
 
-def main():
+def patternCount_main():
     # input
     filename = "dataset_2_6.txt" ## Change this ##
 
@@ -24,15 +24,18 @@ def patternCount(text, pattern):
     count = 0
 
     for i in range(0, (len(text) - len(pattern)) + 1):
-        # get word
-        word = ""
-        for j in range(i, i + len(pattern)):
-            word = word + text[j]
+        word = getText(text, i, len(pattern))
 
         if pattern == word:
             count += 1
 
     return count
+
+def getText(text, i , k):
+    word = ""
+    for j in range(i, i + k):
+        word = word + text[j]
+    return word
             
 if __name__ == "__main__":
-    main()
+    patternCount_main()

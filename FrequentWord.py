@@ -1,7 +1,8 @@
 # FrequentWord algorithm #
 
+import PatternCount
 
-def main():
+def frequentWord_main():
     # input
     filename = "dataset_2_9.txt" ## Change this ##
 
@@ -9,17 +10,24 @@ def main():
     data = handle.read().splitlines()
     handle.close()
     
-    print frequentWord(data[0], int(data[1]))
+    for item in frequentWord(data[0], int(data[1])):
+        print item,
 
 def frequentWord(text, k):
-    freqPatterns = []
+    freqPatterns = set()
+    count = []
     for i in range(0, (len(text) - k) + 1):
-        # get word
-        word = ""
-        for j in range(i, i + k):
-            word = word + text[j]
+        pattern = PatternCount.getText(text, i, k)
+ 
+        count.append( PatternCount.patternCount(text, pattern) )
 
-    return ""
+    maxCount = max(count)
+    for i in range(0, (len(text) - k) + 1):
+        if count[i] == maxCount:
+            # set - there are no duplicates #
+            freqPatterns.add( PatternCount.getText(text, i, k) )
+            
+    return freqPatterns
 
 if __name__ == "__main__":
-    main()
+    frequentWord_main()
