@@ -5,24 +5,21 @@
 def findClump(genome, k, L, t):
     #print "--- findClump: finding pattern counts in genome"
     clumps = {}
-    for i in range(0, (len(genome) - k) + 1):
-        word = getText(genome, i, k)
-        if word not in clumps:
-            #print "--- findClump: adding ", word, " to count dictionary"
-            clumps[word] = patternMatch(genome, word)
-
-    #print "--- findClump: calculating (L,t) clumps"
     kmers = []
-    for pattern in clumps:
-        patLocs = clumps[pattern]
-        # Don't bother checking if pattern count is less than t
-        if len(patLocs) < t:
-            continue
-
-        for i in range(0, len(patLocs) - t + 1):
-            if patLocs[i + (t - 1)] - patLocs[i] <= L - k:
-                kmers.append(pattern)
-                break
+    for i in range(0, (len(genome) - k) + 1):
+        # Get pattern from genone
+        pattern = ""
+        for j in range(i, i + k):
+            pattern = pattern + genome[j]
+        # Don't bother checking if pattern is already in kmers
+        if pattern not in kmers and pattern in clumps:
+            patLocs = clumps[pattern]
+            patLocs.append(i)
+            if len(patLocs) >= t:
+                if patLocs[len(patLocs) - 1] - patLocs[len(patLocs) - t] <= L - k:
+                    kmers.append(pattern)
+        else:
+            clumps[pattern] = [i]
 
     return kmers
 
