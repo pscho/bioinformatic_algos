@@ -75,3 +75,9 @@ def reverseComplement(text):
     
     return reverse
 
+# Compute the skew of C an G in a given genome; the first element is set to zero
+def skewCG(genome):
+    for i in range(0, len(genome)):
+        print genome[i]
+
+
