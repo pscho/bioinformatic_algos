@@ -7,7 +7,9 @@ def skew_main():
     with open("test_data.txt", "r") as handle:
         data = handle.read()
 
-    bio.skewCG(data);
+    skew = bio.skewCG(data)
+    for item in skew:
+        print item,
 
 if __name__ == "__main__":
     skew_main()
